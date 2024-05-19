@@ -171,6 +171,7 @@
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+import uvicorn
 import pandas as pd
 import api_blibli as sb
 import api_bukalapak as bk
@@ -209,3 +210,7 @@ async def scrape(keyword: str = ""):
     df = scrap_data(keyword)
     json_compatible_item_data = df.to_dict(orient='records')
     return JSONResponse(content=json_compatible_item_data)
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8080)
